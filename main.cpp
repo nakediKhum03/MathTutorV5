@@ -39,6 +39,8 @@
 #include <string>
 using namespace std;
 
+void DisplayGameIntro ();
+string GetUserName ();
 
 
 int main() {
@@ -63,14 +65,10 @@ int main() {
 
     vector<vector<int> > questions;
 
-    string userInput = "?";
+   string userInput = "?" ;
 
-
-
-    cout << "What is your name?" << endl; // where the user puts there name
-    getline(cin, userName); // gets the user's fullnames with getline
-    cout << "Welcome, " << userName << ", to the Simply Silly Math Tutor!" << endl; // prints and welcomes the user
-    cout << endl;
+    DisplayGameIntro () ;
+    userName = GetUserName ();
 
 
     do {
@@ -295,4 +293,19 @@ void DisplayGameIntro() {
 
 
     return;
+}
+
+/*******************************************************************
+ *Get user's name, welcome user, and return user name
+ *******************************************************************/
+
+ string GetUserName () {
+
+    string userName = "?";
+
+    cout << "What is your name?" << endl; // where the user puts there name
+    getline(cin, userName); // gets the user's fullnames with getline
+    cout << "Welcome, " << userName << ", to the Simply Silly Math Tutor!" << endl; // prints and welcomes the user
+
+    return userName;
 }
