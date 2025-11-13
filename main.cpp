@@ -41,6 +41,8 @@ using namespace std;
 
 void DisplayGameIntro ();
 string GetUserName ();
+int GetNumericValue();
+string AskToPlayAgain ();
 
 
 int main() {
@@ -62,6 +64,7 @@ int main() {
     int mathLevel = 1;
     int currentRange = LEVEL_CHANGE;
     int attempts = 0;
+
 
     vector<vector<int> > questions;
 
@@ -118,11 +121,7 @@ int main() {
         for (int i = 1; i <= MAX_ATTEMPTS; ++i) {
             // ... your input handling stays the same ...
 
-            while (!(cin >> userAnswer)) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "\tInvalid input!\n\tPlease enter a number:" << endl;
-            }
+            userAnswer = GetNumericValue();
 
 
             if (userAnswer == totalNum) {
@@ -174,22 +173,9 @@ int main() {
 
         getline(cin, userInput);
 
-        while (true) {
-            cout << "Do you want to continue (y=yes || n=no)? " << endl;
-            getline(cin, userInput);
+        userInput = AskToPlayAgain();
 
-            for (int i = 0; i < userInput.size(); i++) {
-                userInput.at(i) = tolower(userInput.at(i));
-            }
-
-            if (userInput == "y" || userInput == "yes" ||
-                userInput == "n" || userInput == "no") {
-                break;
-            } else {
-                cout << "Invalid input, please try again..." << endl;
-                cout << endl;
-            }
-        } // end of while true loop
+        // end of while true loop
     } while (userInput == "yes" || userInput == "y"); // end of do-while
 
     cout << "===================================" << endl;
@@ -296,7 +282,7 @@ void DisplayGameIntro() {
 }
 
 /*******************************************************************
- *Get user's name, welcome user, and return user name
+ *Get user's name, welcome user, and return username
  *******************************************************************/
 
  string GetUserName () {
@@ -308,4 +294,54 @@ void DisplayGameIntro() {
     cout << "Welcome, " << userName << ", to the Simply Silly Math Tutor!" << endl; // prints and welcomes the user
 
     return userName;
+}
+
+/************************************************************
+ *Generate each random question
+ *Parameters: mathLevel used to set the left & right ranges
+ *Returns the currents question's data as an int vector
+ ************************************************************/
+int GetNumericValue () {
+
+    int userAnswer;
+
+
+    while (!(cin >> userAnswer)) {
+        cin >> userAnswer;
+
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "\tInvalid input!\n\tPlease enter a number:" << endl;
+    }
+
+
+return userAnswer;
+}
+
+/**************************************************
+ *
+ *************************************************/
+
+string AskToPlayAgain() {
+    string userInput;
+
+    while (true) {
+        cout << "Do you want to continue (y=yes || n=no)? " << endl;
+        getline(cin, userInput);
+
+        for (int i = 0; i < userInput.size(); i++) {
+            userInput.at(i) = tolower(userInput.at(i));
+        }
+
+        if (userInput == "y" || userInput == "yes" ||
+            userInput == "n" || userInput == "no") {
+            break;
+            } else {
+                cout << "Invalid input, please try again..." << endl;
+                cout << endl;
+            }
+    } // end of while true loop
+
+
+    return userInput;
 }
