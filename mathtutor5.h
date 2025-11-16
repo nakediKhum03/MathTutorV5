@@ -1,0 +1,26 @@
+/**************************************************************************************************
+ Program.....: MathTutor V5
+ Programmer..:Khumo Nakedi
+ Date........:11/16/2025
+ replit URL..:https://github.com/nakediKhum03/MathTutorV5.git
+ Description.:This file contains all the prototypes for the functions that the m,ain function calls
+ **************************************************************************************************/
+
+#ifndef MATHTUTOR_H
+#define MATHTUTOR_H
+
+#include <string>
+#include <vector>
+using namespace std;
+
+void DisplayGameIntro ();
+string GetUserName ();
+
+
+vector <int>GetRandomQuestions (int mathLevel);
+int GetNumericValue();
+bool CheckForLevelChange (int &totalCorrect, int &totalIncorrect, int &mathLevel);
+string AskToPlayAgain (string userName);
+void DisplaySummaryReport(const vector <vector <int>> &allQuestions);
+
+#endif //MATHTUTOR_H
