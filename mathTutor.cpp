@@ -51,6 +51,8 @@ using namespace std;
 const int MAX_ATTEMPTS = 3;
 const int LEVEL_CHANGE = 10; //How much to increase the range when leveling up and down
 
+vector <int> g_attempts;
+
 /****************************************************
  * Displays Program header
  ***************************************************/
@@ -181,6 +183,50 @@ vector <int>GenerateRandomQuestion ( int mathLevel) {
     return question;
 }
 
+/****
+ * Give 3 attempts to use to give them a display oof what level they are currently on
+ *****/
+
+bool GiveThreeAttempts (string userName, vector<int> currentQuestion) {
+
+    int userAnswer = 0;
+    bool isCorrect = false;
+    int attemptsUsed = 0;
+
+    int mathLevel = currentQuestion.at(0);
+    int leftNum = currentQuestion.at(1);
+    char mathOperator = static_cast<char>(currentQuestion.at(2));
+    int rightNum = currentQuestion.at(3);
+    int totalNum = currentQuestion.at(4);
+
+
+
+    for (int i = 1; i <= MAX_ATTEMPTS; ++i) {
+
+        cout << "[Level #" << mathLevel << "] " << userName << ", what is " << leftNum << " " << mathOperator << " " <<
+                rightNum << " = " << "?" << endl; // displays the question
+        // ... your input handling stays the same ...
+
+        userAnswer = GetNumericValue();
+
+
+        if (userAnswer == totalNum) {
+            cout << "Excellent Job Einstein!" << endl;
+            attemptsUsed = i;// record how many tries it took
+            isCorrect = true;
+            break; // stop asking this question
+        }
+
+        if (i == MAX_ATTEMPTS) {
+            cout << "Sorry, you're out of attempts. Correct answer: " << totalNum << endl;
+        } else {
+            cout << (MAX_ATTEMPTS - i) << " attempt/s left." << endl;
+            cout << "Try Again" << endl;
+        }
+    }
+     g_attempts.push_back(attemptsUsed);
+}
+
 
 
 /**************************************************
@@ -197,8 +243,8 @@ string AskToPlayAgain() {
         cout << "Do you want to continue (y=yes || n=no)? " << endl;
         getline(cin, userInput);
 
-        for (int i = 0; i < userInput.size(); i++) {
-            userInput.at(i) = tolower(userInput.at(i));
+        for (int i = 0; i < static_cast<int> (userInput.size()); i++) {
+            userInput.at(i) = static_cast<char> (tolower(userInput.at(i)));
         }
 
         if (userInput == "y" || userInput == "yes" ||
@@ -290,49 +336,7 @@ void DisplaySummaryReport(const vector<vector <int>> &allQuestions) {
 
 }
 
-/****
- * Give 3 attempts to use to give them a display oof what level they are currently on
- *****/
 
-bool GiveThreeAttempts (string userName, vector<int> currentQuestion) {
-
-    int userAnswer = 0;
-    bool isCorrect = false;
-
-    int mathLevel = currentQuestion.at(0);
-    int leftNum = currentQuestion.at(1);
-    char mathOperator = static_cast<char>(currentQuestion.at(2));
-    int rightNum = currentQuestion.at(3);
-    int totalNum = currentQuestion.at(4);
-
-
-
-    for (int i = 1; i <= MAX_ATTEMPTS; ++i) {
-
-        cout << "[Level #" << mathLevel << "] " << userName << ", what is " << leftNum << " " << mathOperator << " " <<
-                rightNum << " = " << "?" << endl; // displays the question
-        // ... your input handling stays the same ...
-
-        userAnswer = GetNumericValue();
-
-
-        if (userAnswer == totalNum) {
-            cout << "Excellent Job Einstein!" << endl;
-            question.push_back(i);// record how many tries it took
-            return true; // stop asking this question
-        }
-
-        if (i == MAX_ATTEMPTS) {
-            cout << "Sorry, you're out of attempts. Correct answer: " << totalNum << endl;
-            question.push_back(0);
-        } else {
-            cout << (MAX_ATTEMPTS - i) << " attempt/s left." << endl;
-            cout << "Try Again" << endl;
-        }
-    }
-    return false;
-
-}
 
 /******************************************************
  *Check for level change
