@@ -225,6 +225,8 @@ bool GiveThreeAttempts (string userName, vector<int> currentQuestion) {
         }
     }
      g_attempts.push_back(attemptsUsed);
+
+    return isCorrect;
 }
 
 
@@ -258,6 +260,29 @@ string AskToPlayAgain() {
 
 
     return userInput;
+}
+
+/******************************************************
+ *Check for level change (up or down)
+ ******************************************************/
+void CheckForLevelChange(int &totalCorrect, int &totalIncorrect, int &mathLevel) {
+    int LEVEL_RANGE_CHANGE= 0;
+
+    if (totalCorrect ==3) {
+        mathLevel++;
+        totalCorrect = 0;
+        totalIncorrect = 0;
+        cout << "You are currently on level " << mathLevel << endl;
+        cout << "Your range is now from 1 to " << LEVEL_RANGE_CHANGE << endl;
+        cout << endl;
+    } else if (totalIncorrect >=3 && totalIncorrect >1) {
+        mathLevel--;
+        totalIncorrect = 0;
+        totalCorrect = 0;
+        cout << "You are currently on level " << mathLevel << endl;
+        cout << "Your range is now from 1 to " << mathLevel * LEVEL_RANGE_CHANGE << endl;
+        cout << endl;
+    }
 }
 
 /***********************************************************
@@ -294,7 +319,12 @@ void DisplaySummaryReport(const vector<vector <int>> &allQuestions) {
             char mathOperator = static_cast<char>(questions.at(2));
             int rightNum = questions.at(3);
             int totalNum = questions.at(4);
-            int attemptsUsed = questions.at(5);
+
+            int attemptsUsed = 0;
+
+            if (i < static_cast<int>(g_attempts.size())) {
+                attemptsUsed = g_attempts.at(i);
+            }
 
             cout << left << setw (7) << mathLevel;
 
@@ -338,28 +368,7 @@ void DisplaySummaryReport(const vector<vector <int>> &allQuestions) {
 
 
 
-/******************************************************
- *Check for level change
- ******************************************************/
-void CheckForLevelChange(int &totalCorrect, int &totalIncorrect, int &mathLevel) {
-    int LEVEL_RANGE_CHANGE= 0;
 
-    if (totalCorrect ==3) {
-        mathLevel++;
-        totalCorrect = 0;
-        totalIncorrect = 0;
-        cout << "You are currently on level " << mathLevel << endl;
-        cout << "Your range is now from 1 to " << LEVEL_RANGE_CHANGE << endl;
-        cout << endl;
-    } else if (totalIncorrect >=3 && totalIncorrect >1) {
-        mathLevel--;
-        totalIncorrect = 0;
-        totalCorrect = 0;
-        cout << "You are currently on level " << mathLevel << endl;
-        cout << "Your range is now from 1 to " << mathLevel * LEVEL_RANGE_CHANGE << endl;
-        cout << endl;
-    }
-}
 
 
 

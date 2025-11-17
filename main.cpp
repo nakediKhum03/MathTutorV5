@@ -1,8 +1,8 @@
 /*
 * Title:       Math Tutor V5
-*Programer(s): Khumo Nakedi & Christopher Thomas
+*Programer(s): Khumo Nakedi
 *Date:         10/29/2025
-*Github URL:   https://github.com/nakediKhum03/MathTutorV4.git
+*Github URL:   https://github.com/nakediKhum03/MathTutorV5/blob/main/mathtutor5.h
 *Description:  A simple math tutor designed to help students practice and improve their basic  math arithmetic skills.
 *              This program randomly generates integer-based math problems—addition, subtraction, multiplication,
 *              and division for the user to solve. The user's name is collected using getline, and they are then
@@ -28,11 +28,11 @@
 */
 
 
-#include<iostream>
-#include <ctime>
-#include <cstdlib>
-#include <vector>
-#include <string>
+#include<iostream> // cin and cout
+#include <ctime> // time seeding
+#include <cstdlib> // srand and rand
+#include <vector> // stroring questions in 2D vector
+#include <string> // string data types
 
 #include "mathtutor5.h"
 using namespace std;
@@ -40,6 +40,7 @@ using namespace std;
 
 int main () {
      vector<vector<int>> allQuestions;
+
      string userName = "?";
      string userInput = "?";
 
@@ -53,6 +54,7 @@ int main () {
 
      DisplayGameIntro();
      userName = GetUserName();
+
      do {
           vector<int> currentQuestion = GenerateRandomQuestion(mathLevel);
 

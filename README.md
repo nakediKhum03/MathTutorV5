@@ -120,5 +120,5 @@ End of program
 
 
 ## Maintainers
-[@CMCQueen15](...) Colton McQueen   
+  
 [@nakediKhum03](...) Khumo Nakedi
