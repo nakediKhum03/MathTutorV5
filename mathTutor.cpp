@@ -33,23 +33,18 @@
 
 
 #include <cstdlib>
-#include <ctime>
-#include <cctype>
 #include<iomanip>
 #include <vector>
 #include <iostream>
 #include <limits>
-#include <sstream>
 #include <string>
 using namespace std;
 
 #include "mathtutor5.h"
 
 
-
-
-const int MAX_ATTEMPTS = 3;
-const int LEVEL_CHANGE = 10; //How much to increase the range when leveling up and down
+constexpr int MAX_ATTEMPTS = 3;
+constexpr int LEVEL_CHANGE = 10; //How much to increase the range when leveling up and down
 
 vector <int> g_attempts;
 
@@ -187,7 +182,7 @@ vector <int>GenerateRandomQuestion ( int mathLevel) {
  * Give 3 attempts to use to give them a display oof what level they are currently on
  *****/
 
-bool GiveThreeAttempts (string userName, vector<int> currentQuestion) {
+bool GiveThreeAttempts (const string& userName, vector<int> currentQuestion) {
 
     int userAnswer = 0;
     bool isCorrect = false;
@@ -238,15 +233,15 @@ bool GiveThreeAttempts (string userName, vector<int> currentQuestion) {
  *Returns the user's input as a string
  *************************************************/
 
-string AskToPlayAgain() {
+string AskToPlayAgain(string userName) {
     string userInput;
 
     while (true) {
         cout << "Do you want to continue (y=yes || n=no)? " << endl;
         getline(cin, userInput);
 
-        for (int i = 0; i < static_cast<int> (userInput.size()); i++) {
-            userInput.at(i) = static_cast<char> (tolower(userInput.at(i)));
+        for (char & i : userInput) {
+            i = static_cast<char> (tolower(i));
         }
 
         if (userInput == "y" || userInput == "yes" ||
