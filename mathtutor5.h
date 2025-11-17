@@ -15,11 +15,11 @@ using namespace std;
 
 void DisplayGameIntro ();
 string GetUserName ();
-
-
-vector <int>GetRandomQuestions (int mathLevel);
+vector <int>GenerateRandomQuestion (int mathLevel);
 int GetNumericValue();
-bool CheckForLevelChange (int &totalCorrect, int &totalIncorrect, int &mathLevel);
+bool GiveThreeAttempts (string userName, vector <int> currentQuestion);
+void CheckForLevelChange (int &totalCorrect, int &totalIncorrect,
+                          int &mathLevel);
 string AskToPlayAgain (string userName);
 void DisplaySummaryReport(const vector<vector <int>> &allQuestions);
 

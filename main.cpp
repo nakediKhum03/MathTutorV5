@@ -28,18 +28,15 @@
 */
 
 
-#include <cstdlib>
+#include<iostream>
 #include <ctime>
-#include <cctype>
-#include<iomanip>
+#include <cstdlib>
 #include <vector>
-#include <iostream>
-#include <limits>
-#include <sstream>
 #include <string>
 
 #include "mathtutor5.h"
 using namespace std;
+
 
 int main () {
      vector<vector<int>> allQuestions;
