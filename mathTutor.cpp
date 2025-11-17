@@ -43,6 +43,8 @@
 #include <string>
 using namespace std;
 
+#include "mathtutor5.h"
+
 
 
 
@@ -104,15 +106,79 @@ int GetNumericValue () {
 
 
     while (!(cin >> userAnswer)) {
-        cin >> userAnswer;
 
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "\tInvalid input!\n\tPlease enter a number:" << endl;
     }
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 
     return userAnswer;
+} //
+
+/*******************************************************
+ Generate random question  based on mathLevel
+ Returns: vector <int> {level, leftNum, mathOperator,
+          rightNum, totalNum}
+ *****************************************************/
+vector <int>GenerateRandomQuestion ( int mathLevel) {
+
+    enum MATH_TYPE { MT_ADD = 1, MT_SUB = 2, MT_MUL = 3, MT_DIV = 4 };
+    MATH_TYPE mathType = MT_ADD;
+
+    int tempNum =0;
+    int leftNum =0;
+    int rightNum =0;
+    char mathOperator = '?';
+    int totalNum = 0;
+
+
+
+    srand(time(0)); // Randomizing numbers
+    leftNum = rand() % (mathLevel * LEVEL_CHANGE) + 1;
+    rightNum = rand() % (mathLevel * LEVEL_CHANGE) + 1;
+    mathType = static_cast<MATH_TYPE>(rand() % 4 + 1);
+
+    switch (mathType) {
+        // logic behind generating problems based of the math type
+        case MT_ADD:
+            mathOperator = '+';
+            totalNum = leftNum + rightNum; // answer for addition
+            break;
+        case MT_SUB:
+            mathOperator = '-';
+            if (rightNum > leftNum) {
+                // making sure that we won't get a negative number when subtracting
+                tempNum = leftNum;
+                leftNum = rightNum;
+                rightNum = tempNum;
+            }
+            totalNum = leftNum - rightNum; // answer for subtraction
+            break;
+        case MT_MUL:
+            mathOperator = '*';
+            totalNum = leftNum * rightNum; //answer for multiplication
+            break;
+        case MT_DIV:
+            mathOperator = '/';
+            totalNum = leftNum; // makes sure there is no fractions and correct answer
+            leftNum = leftNum * rightNum; // makes sure there is no fractions
+            break;
+        default: // if math type is invalid and it ends the program
+            cout << "invaild math type!" << endl;
+            cout << "contact Khumo for help" << endl;
+            exit (-1);
+    }
+
+    vector <int> question;
+    question.push_back (mathLevel);
+    question.push_back (leftNum);
+    question.push_back (static_cast <int> (mathOperator));
+    question.push_back (rightNum);
+    question.push_back (totalNum);
+
+    return question;
 }
 
 
@@ -228,18 +294,18 @@ void DisplaySummaryReport(const vector<vector <int>> &allQuestions) {
  * Give 3 attempts to use to give them a display oof what level they are currently on
  *****/
 
-bool GiveThreeAttempts (string userName, vector<int> &question) {
+bool GiveThreeAttempts (string userName, vector<int> currentQuestion) {
 
     int userAnswer = 0;
     bool isCorrect = false;
 
-    int mathLevel = question.at(0);
-    int leftNum = question.at(1);
-    char mathOperator = static_cast<char>(question.at(2));
-    int rightNum = question.at(3);
-    int totalNum = question.at(4);
+    int mathLevel = currentQuestion.at(0);
+    int leftNum = currentQuestion.at(1);
+    char mathOperator = static_cast<char>(currentQuestion.at(2));
+    int rightNum = currentQuestion.at(3);
+    int totalNum = currentQuestion.at(4);
 
-    question.push_back (0);
+
 
     for (int i = 1; i <= MAX_ATTEMPTS; ++i) {
 
@@ -292,59 +358,6 @@ void CheckForLevelChange(int &totalCorrect, int &totalIncorrect, int &mathLevel)
 }
 
 
-/*******************************************************
- *Generate random Question
- *****************************************************/
-vector <int>GetRandomQuestions ( int mathLevel) {
-
-    enum MATH_TYPE { MT_ADD = 1, MT_SUB = 2, MT_MUL = 3, MT_DIV = 4 };
-    MATH_TYPE mathType = MT_ADD;
-
-    int tempNum =0;
-    int leftNum =0;
-    int rightNum =0;
-    char mathOperator = '?';
-    int totalNum = 0;
-
-
-
-    srand(time(0)); // Randomizing numbers
-    leftNum = rand() % (mathLevel * LEVEL_CHANGE) + 1;
-    rightNum = rand() % (mathLevel * LEVEL_CHANGE) + 1;
-    mathType = static_cast<MATH_TYPE>(rand() % 4 + 1);
-
-    switch (mathType) {
-        // logic behind generating problems based of the math type
-        case MT_ADD:
-            mathOperator = '+';
-            totalNum = leftNum + rightNum; // answer for addition
-            break;
-        case MT_SUB:
-            mathOperator = '-';
-            if (rightNum > leftNum) {
-                // making sure that we won't get a negative number when subtracting
-                tempNum = leftNum;
-                leftNum = rightNum;
-                rightNum = tempNum;
-            }
-            totalNum = leftNum - rightNum; // answer for subtraction
-            break;
-        case MT_MUL:
-            mathOperator = '*';
-            totalNum = leftNum * rightNum; //answer for multiplication
-            break;
-        case MT_DIV:
-            mathOperator = '/';
-            totalNum = leftNum; // makes sure there is no fractions and correct answer
-            leftNum = leftNum * rightNum; // makes sure there is no fractions
-            break;
-        default: // if math type is invalid and it ends the program
-            cout << "invaild math type!" << endl;
-            cout << "contact Khumo for help" << endl;
-            exit (-1);
-    }
-    return {mathLevel, leftNum, mathOperator, rightNum, totalNum};
-}
 
 
 
@@ -358,73 +371,8 @@ vector <int>GetRandomQuestions ( int mathLevel) {
 
 
 
-    string userName;
-    int userAnswer = 0;
-    int totalCorrect = 0;
-    int totalIncorrect = 0;
-    int attempts = 0;
 
 
-    vector<vector<int> > questions;
-
-   string userInput = "?" ;
-
-    DisplayGameIntro () ;
-    userName = GetUserName ();
-
-
-
-
-
-
-
-        vector<int> row = {mathLevel, leftNum, rightNum, static_cast<int>(mathOperator), totalNum};
-        int attemptsUsed = 0; // 0 = user never got it correct within MAX_ATTEMPTS
-
-
-
-
-
-        row.push_back(attemptsUsed); // attemptsUsed == 0 means Incorrect in summary
-
-        questions.push_back(row); // now the row has 6 fields as the summary expects
-
-
-        if (attemptsUsed == 0) {
-            cout << endl;
-        }
-
-
-        if (totalCorrect == 3) {
-            // Level Up logic
-            mathLevel++;
-            totalCorrect = 0;
-            totalIncorrect = 0;
-            currentRange += LEVEL_CHANGE;
-            cout << "You are currently on level " << mathLevel << endl;
-            cout << "Your new range is now from 1 to " << currentRange << endl;
-            cout << endl;
-        } else if (totalIncorrect == 3 && mathLevel > 1) {
-            // Level Down logic
-            mathLevel--;
-            totalCorrect = 0;
-            totalIncorrect = 0;
-            currentRange -= LEVEL_CHANGE;
-            cout << "You are currently on level " << mathLevel << endl;
-            cout << "Your range is now from 1 to " << currentRange << endl;
-            cout << endl;
-        } // end of if-else
-
-        getline(cin, userInput);
-
-        userInput = AskToPlayAgain();
-
-        // end of while true loop
-    }while (userInput == "yes" || userInput == "y"); // end of do-while
-
-
-
-   // displays grading
 
 
 
