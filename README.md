@@ -13,111 +13,133 @@ Fun math facts:
 ******************************************************************************************************
 
 What is your name?
-Chris
 
-Welcome, Chris, to the Simply Silly Math Tutor!
+Khumo
 
-[Level #1] Chris, what is 2 * 5 = ?
-10
+Welcome, Khumo, to the Simply Silly Math Tutor!
 
-Excellent Job Einstein!
-Do you want to continue (y=yes || n=no)?
-yes
+[Level #1] Khumo, what is 7 - 3 = ?
 
-[Level #1] Chris, what is 6 * 8 = ?
-48
+4
 
 Excellent Job Einstein!
-Do you want to continue (y=yes || n=no)?
-yes
 
-[Level #1] Chris, what is 4 - 1 = ?
+Do you want to continue (y=yes || n=no)?
+
+y
+
+[Level #1] Khumo, what is 2 * 1 = ?
+
+2
+
+Excellent Job Einstein!
+
+Do you want to continue (y=yes || n=no)?
+
+y
+
+[Level #1] Khumo, what is 24 / 8 = ?
+
+h
+
+Invalid input!
+
+Please enter a number:
+
 3
 
 Excellent Job Einstein!
+
 You are currently on level 2
-Your new range is now from 1 to 20
+
+Your range is now from 1 to 0
+
+
 
 Do you want to continue (y=yes || n=no)?
-yes
 
-[Level #2] Chris, what is 7 * 4 = ?
-28
+y
+
+[Level #2] Khumo, what is 3 - 1 = ?
+
+1
+
+2 attempt/s left.
+
+Try Again
+
+[Level #2] Khumo, what is 3 - 1 = ?
+
+2
 
 Excellent Job Einstein!
-Do you want to continue (y=yes || n=no)?
-yes
-
-[Level #2] Chris, what is 4 * 2 = ?
-8
-
-Excellent Job Einstein!
-Do you want to continue (y=yes || n=no)?
-yes
-
-[Level #2] Chris, what is 204 / 12 = ?
-17
-
-Excellent Job Einstein!
-You are currently on level 3
-Your new range is now from 1 to 30
 
 Do you want to continue (y=yes || n=no)?
-yes
 
-[Level #3] Chris, what is 18 - 5 = ?
-13
+y
 
-Excellent Job Einstein!
+[Level #2] Khumo, what is 7 * 15 = ?
+
+100
+
+2 attempt/s left.
+
+Try Again
+
+[Level #2] Khumo, what is 7 * 15 = ?
+
+120
+
+1 attempt/s left.
+
+Try Again
+
+[Level #2] Khumo, what is 7 * 15 = ?
+
+104
+
+Sorry, you're out of attempts. Correct answer: 105
+
 Do you want to continue (y=yes || n=no)?
-yes
 
-[Level #3] Chris, what is 2 * 22 = ?
-44
-
-Excellent Job Einstein!
-Do you want to continue (y=yes || n=no)?
-yes
-
-[Level #3] Chris, what is 462 / 21 = ?
-22
-
-Excellent Job Einstein!
-You are currently on level 4
-Your new range is now from 1 to 40
-
-Do you want to continue (y=yes || n=no)?
-no
+n
 
 ===================================
 
-Summary Report
+Summary Report           
 
 ===================================
 
-Level Questions Attempts
+<div align="right">
 
------ ----------------------------    --------
+| Level | Question        | Attempts | Result     |
+|------:|----------------:|----------:|-----------:|
+|     1 | 7 - 3 = 4       |        1 | Correct!   |
+|     2 | 1 * 2 = 2       |        1 | Correct!   |
+|     1 | 24 / 8 = 3      |        1 | Correct!   |
+|     2 | 3 - 1 = 2       |        2 | Correct!   |
+|     2 | 7 * 15 = 105    |        0 | Incorrect! |
 
-    1   2 * 5 = 10                       1
-    1   6 * 8 = 48                       1
-    1   4 - 1 = 3                        1
-    2   7 * 4 = 28                       1
-    2   4 * 2 = 8                        1
-    2   204 / 12 = 17                    1
-    3   18 - 5 = 13                      1
-    3   2 * 22 = 44                      1
-    3   462 / 21 = 22                    1
+</div>
 
-Total Correct:   9  
-Total Incorrect: 0  
-Average:         100%
 
-That's all folks!  
-Come back for version four to see what is in store!  
+
+
+Total Correct:   4
+
+Total Incorrect: 1
+
+Average:         80%
+
+
+
+That's all folks!
+Come back for version four to see what is in store!
 End of program
 
+Keep calm and do math
 
+Process finished with exit code 0
 
 ## Maintainers
   

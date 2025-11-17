@@ -38,6 +38,7 @@
 #include <iostream>
 #include <limits>
 #include <string>
+
 using namespace std;
 
 #include "mathtutor5.h"
@@ -258,7 +259,7 @@ string AskToPlayAgain(string userName) {
 }
 
 /******************************************************
- *Check for level change (up or down)
+ Check for level change (up or down)
  ******************************************************/
 void CheckForLevelChange(int &totalCorrect, int &totalIncorrect, int &mathLevel) {
     int LEVEL_RANGE_CHANGE= 0;
@@ -295,20 +296,19 @@ void DisplaySummaryReport(const vector<vector <int>> &allQuestions) {
     cout << "===================================" << endl;
     cout << "          Summary Report           " << endl;
     cout << "===================================" << endl;
-    cout << "Level      Questions     Attempts  " << endl;
-    cout << "----- ------------------ --------- " << endl;
+
     cout << left << setw (7) << "Level"
          << left << setw (22) << "Question"
          << left << setw (10) << "Attempts"
          << "Results" << endl;
-    cout << "----- ------------------ --------- " << endl;
+    cout << "____ ______________________ __________ _______"<< endl;
+    cout << endl;
 
 
     for (int i = 0; i < static_cast<int>(allQuestions.size()); ++i) {
         const vector<int> &questions = allQuestions.at(i);
 
-        if (questions.size() < 6) {
-        } else {
+        if (questions.size() >= 5) {
             int mathLevel = questions.at(0);
             int leftNum = questions.at(1);
             char mathOperator = static_cast<char>(questions.at(2));
@@ -323,9 +323,13 @@ void DisplaySummaryReport(const vector<vector <int>> &allQuestions) {
 
             cout << left << setw (7) << mathLevel;
 
-            cout << left << setw (22);
-            cout << leftNum << " " << mathOperator << " "
-                 << rightNum << " = " << totalNum;
+            cout << left << setw (4) << leftNum;
+            cout << " " << mathOperator << " ";
+            cout << setw (4) << rightNum;
+            cout << " = ";
+            cout << setw(6) << totalNum;
+
+            cout << "  ";
 
             cout << left << setw (10) << attemptsUsed;
 
