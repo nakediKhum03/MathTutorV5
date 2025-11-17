@@ -3,7 +3,7 @@
  Programmer..:Khumo Nakedi
  Date........:11/16/2025
  replit URL..:https://github.com/nakediKhum03/MathTutorV5.git
- Description.:This file contains all the prototypes for the functions that the m,ain function calls
+ Description.:This file contains all the prototypes for the functions that the main function calls
  **************************************************************************************************/
 
 #ifndef MATHTUTOR_H
