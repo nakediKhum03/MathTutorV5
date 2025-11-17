@@ -21,6 +21,6 @@ vector <int>GetRandomQuestions (int mathLevel);
 int GetNumericValue();
 bool CheckForLevelChange (int &totalCorrect, int &totalIncorrect, int &mathLevel);
 string AskToPlayAgain (string userName);
-void DisplaySummaryReport(const vector <vector <int>> &allQuestions);
+void DisplaySummaryReport(const vector<vector <int>> &allQuestions);
 
 #endif //MATHTUTOR_H

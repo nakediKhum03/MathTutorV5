@@ -130,6 +130,8 @@ bool GiveThreeAttempts (string userName, vector<int> &question) {
     int rightNum = question.at(3);
     int totalNum = question.at(4);
 
+    question.push_back (0);
+
     for (int i = 1; i <= MAX_ATTEMPTS; ++i) {
 
         cout << "[Level #" << mathLevel << "] " << userName << ", what is " << leftNum << " " << mathOperator << " " <<
@@ -195,80 +197,60 @@ string AskToPlayAgain() {
  answered questions with an average percentage score given at
  the end.
  ***********************************************************/
-void DisplaySummaryReport() {
-
+void DisplaySummaryReport(const vector<vector <int>> &allQuestions) {
     int totalIncorrect = 0;
     int totalCorrect = 0;
-    int mathLevel = totalCorrect;
-    int leftNum = 0;
-    int rightNum = 0;
-    char mathOperator;
-    int questions;
-    int attempts;
-    int totalNum = totalCorrect + totalIncorrect;
-
 
     cout << "===================================" << endl;
     cout << "          Summary Report           " << endl;
     cout << "===================================" << endl;
     cout << "Level      Questions     Attempts  " << endl;
     cout << "----- ------------------ --------- " << endl;
-    cout << endl;
-
-    totalCorrect = 0;
-    totalIncorrect = 0;
-
-
-    for (int i = 0; i < static_cast<int>(questions.size()); ++i) {
-        mathLevel = questions.at(i).at(0);
-        leftNum = questions.at(i).at(1);
-        rightNum = questions.at(i).at(2);
+    cout << left << setw (7) << "Level"
+         << left << setw (22) << "Question"
+         << left << setw (10) << "Attempts"
+         << "Results" << endl;
+    cout << "----- ------------------ --------- " << endl;
 
 
-        int opCode = questions.at(i).at(3);
+    for (int i = 0; i < static_cast<int>(allQuestions.size()); ++i) {
+        const vector<int> &questions = allQuestions.at(i);
 
-        switch (opCode) {
-            case 1: mathOperator = '+';
-                break; // MT_ADD
-            case 2: mathOperator = '-';
-                break; // MT_SUB
-            case 3: mathOperator = '*';
-                break; // MT_MUL
-            case 4: mathOperator = '/';
-                break; // MT_DIV
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-                mathOperator = static_cast<char>(opCode); // already ASCII
-                break;
-            default:
-                mathOperator = '?';
-                break;
-        }
-
-
-        totalNum = questions.at(i).at(4);
-
-
-        // Align columns cleanly
-        cout << right << setw(5) << mathLevel << "   ";
-        cout << left << setw(18)
-                << (to_string(leftNum) + " " + mathOperator + " " + to_string(rightNum) + " = " + to_string(totalNum))
-                << right;
-
-
-        if (attempts != 0) {
-            cout << setw(6) << attempts << endl;
-            totalCorrect++;
+        if (questions.size() < 6) {
         } else {
-            cout << "Incorrect" << endl;
-            totalIncorrect++;
-        }
-    } // end of for loop
+            int mathLevel = questions.at(0);
+            int leftNum = questions.at(1);
+            char mathOperator = static_cast<char>(questions.at(2));
+            int rightNum = questions.at(3);
+            int totalNum = questions.at(4);
+            int attemptsUsed = questions.at(5);
 
-    int totalQs = static_cast<int>(questions.size());
-    int percent = (totalQs > 0) ? (totalCorrect * 100) / totalQs : 0;
+            cout << left << setw (7) << mathLevel;
+
+            cout << left << setw (22);
+            cout << leftNum << " " << mathOperator << " "
+                 << rightNum << " = " << totalNum;
+
+            cout << left << setw (10) << attemptsUsed;
+
+            if (attemptsUsed > 0 ) {
+                cout << "Correct!" << endl;
+                totalCorrect++;
+            } else {
+                cout << "Incorrect!" << endl;
+                totalIncorrect++;
+            }
+        }
+    }
+
+
+
+
+    int totalQs = totalCorrect + totalIncorrect;
+    int percent = 0;
+    if (totalQs > 0) {
+        percent = totalCorrect * 100 / totalQs;
+    }
 
     cout << endl;
     cout << "Total Correct:   " << totalCorrect << endl;
