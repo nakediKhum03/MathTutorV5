@@ -134,7 +134,7 @@ Average:         80%
 
 
 That's all folks!
-Come back for version four to see what is in store!
+Come back for version six to see what is in store!
 End of program
 
 Keep calm and do math
